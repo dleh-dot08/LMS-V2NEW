@@ -1,187 +1,209 @@
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    <div class="app-brand demo">
-        <a href="admin-dashboard" class="app-brand-link">
-            <span class="app-brand-logo demo">
-                <!-- <div class="sidebar-header">
-                    <img src="{{ asset('assets/img/illustrations/logo-asn.png') }}" alt="logo-asn" class="logo-image">
-                </div> -->
-            </span>
-
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                <i class="bx bx-chevron-left bx-sm align-middle"></i>
-            </a>
+<div class="sidebar bg-white border-r border-gray-200 w-64 min-h-screen flex flex-col" id="sidebar">
+    <!-- Logo -->
+    <div class="p-4 border-b border-gray-200 flex items-center justify-center">
+        <span class="text-lg font-bold text-indigo-600">LMS</span>
     </div>
 
-    <div class="menu-inner-shadow"></div>
-
-    <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item active">
-            <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
-
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">master</span>
-        </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-menu"></i>
-                <div data-i18n="Account Settings">Data Manajemen</div>
-            </a>
-            <ul class="menu-sub">
+    <ul class="menu">
+        @foreach(auth()->user()->menu() as $menu)
+            @if(isset($menu['children']))
+                <li class="menu-item has-dropdown">
+                    <button class="dropdown-btn">
+                        {{ $menu['name'] }}
+                        <span class="arrow">▶</span>
+                    </button>
+                    <ul class="submenu">
+                        @foreach($menu['children'] as $child)
+                            <li class="submenu-item">
+                                <a href="{{ route($child['route']) }}">
+                                    {{ $child['name'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            @else
                 <li class="menu-item">
-                    <a href="{{ route('divisi.index') }}" class="menu-link">
-                        <div data-i18n="Account">Data Divisi</div>
+                    <a href="{{ route($menu['route']) }}">
+                        {{ $menu['name'] }}
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="{{ route('jabatan.index') }}" class="menu-link">
-                        <div data-i18n="Account">Data Jabatan</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('tujuan.index') }}" class="menu-link">
-                        <div data-i18n="Account">Data Tujuan</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('instansi.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Data Instansi</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('sekolah.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Data Sekolah</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('users.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Data User</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('jenis_cuti.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Data Jenis Cuti</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('unit_penempatan.index') }}" class="menu-link">
-                        <div data-i18n="Notifications">Data Unit Penempatan</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('karyawan.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Boxicons">Data Master Karyawan</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('mentor.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Boxicons">Data Master Mentor</div>
-            </a>
-        </li>
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Arsip</span>
-        </li>
-
-        <li class="menu-item">
-            <a href="{{ route('jenjang.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Boxicons">Data Jenjang</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('kategori.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Boxicons">Data Kategori</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('sub_kategori.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Boxicons">Data Sub-Kategori</div>
-            </a>
-        </li>
-
-        <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Administrasi</span></li>
-
-        <!-- User interface -->
-        <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="User interface">Surat Menyurat</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('surat_masuk.index') }}" class="menu-link">
-                        <div data-i18n="Accordion">Surat Masuk</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('surat-keluar.index') }}" class="menu-link">
-                        <div data-i18n="Alerts">Surat Keluar</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Extended components -->
-        <li class="menu-item">
-            <a href="{{ route('berita_acara.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-news"></i>
-                <div data-i18n="Boxicons">Berita Acara</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="{{ route('berita-acara.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-news"></i>
-                <div data-i18n="Boxicons">Berita Acara New</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
-            <a href="{{ route('release.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-bookmark"></i>
-                <div data-i18n="Boxicons">Release</div>
-            </a>
-        </li>
-
-        <!-- Forms & Tables -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Human Resource</span></li>
-        <li class="menu-item">
-            <a href="{{ route('data_cuti.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Boxicons">Data Pengajuan Cuti</div>
-            </a>
-        </li>
+            @endif
+        @endforeach
     </ul>
+</div>
 
-</aside>
+<!-- Tombol burger -->
+<div class="burger" id="burger">☰</div>
+
 
 <style>
-    .app-brand {
-        text-align: center;
-        margin-bottom: 20px;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+/* Sidebar style */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    padding: 15px;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+/* Menu styling */
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    margin-bottom: 6px;
+}
+
+.menu-item a,
+.dropdown-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #374151;
+    transition: all 0.2s;
+}
+
+.menu-item a:hover,
+.dropdown-btn:hover {
+    background: #f3f4f6;
+    color: #2563eb;
+}
+
+/* Dropdown arrow */
+.arrow {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.menu-item.active > a,
+.menu-item.active > .dropdown-btn {
+    background: #e0e7ff;
+    color: #1d4ed8;
+}
+
+
+/* Submenu */
+.submenu {
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding-left: 20px;
+    display: none;
+}
+
+.submenu-item a {
+    display: block;
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    color: #4b5563;
+    text-decoration: none;
+}
+
+.submenu-item a:hover {
+    background: #e0e7ff;
+    color: #1d4ed8;
+}
+
+/* Active dropdown */
+.menu-item.active .submenu {
+    display: block;
+}
+.menu-item.active .arrow {
+    transform: rotate(90deg);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%); /* sembunyi default */
+    }
+    .sidebar.active {
+        transform: translateX(0); /* muncul kalau aktif */
+    }
+    .burger {
+        display: block; /* tampilkan tombol burger */
+    }
+    .main-content {
+        margin-left: 0; /* biar full width di mobile */
+    }
+}
+
+/* Tombol burger */
+.burger {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
     }
 
-    .logo-image {
-        max-width: 100%;
-        /* Ensure it doesn't overflow the container */
-        width: 80%;
-        /* Adjust this value as needed */
-        height: auto;
-        /* Maintain the aspect ratio */
+    .sidebar.active {
+        transform: translateX(0);
     }
+
+    .burger {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
 </style>
+
+<script>
+// Sidebar dropdown toggle
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".dropdown-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const parent = btn.closest(".menu-item");
+            parent.classList.toggle("active");
+        });
+    });
+});
+</script>
