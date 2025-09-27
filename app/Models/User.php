@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class User extends Authenticatable
 {
@@ -66,11 +68,11 @@ class User extends Authenticatable
     }
 
     // courses where user is assigned as mentor (via course_mentors)
+    // relation: courses mentored (pivot course_mentors)
     public function coursesMentored()
     {
-        return $this->belongsToMany(Course::class, 'course_mentors', 'user_id', 'course_id')
-                    ->withTimestamps()
-                    ->withPivot('role_in_course');
+        return $this->belongsToMany(\App\Models\Course::class, 'course_mentors', 'user_id', 'course_id')
+                    ->withPivot('role_in_course','assigned_at')->withTimestamps();
     }
 
     // session mentor assignments (session_mentors)

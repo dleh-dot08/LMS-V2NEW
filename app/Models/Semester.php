@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class School extends Model
+class Semester extends Model
 {
     use HasFactory;
 
-    protected $table = 'schools';
+    protected $table = 'semesters';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',
-        'code',
-        'contact',
-        'meta',
+        'start_date',
+        'end_date',
+        'is_active',
     ];
-
-    public function classGroups()
-    {
-        return $this->hasMany(ClassGroup::class, 'school_id');
-    }
 }

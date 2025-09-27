@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class School extends Model
+class ProgramCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'schools';
+    protected $table = 'program_categories';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'name',
-        'code',
-        'contact',
+        'description',
         'meta',
     ];
 
-    public function classGroups()
+    public function programs()
     {
-        return $this->hasMany(ClassGroup::class, 'school_id');
+        return $this->hasMany(Program::class, 'category_id');
     }
 }

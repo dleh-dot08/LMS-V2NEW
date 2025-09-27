@@ -11,15 +11,26 @@ return [
         [
             'name' => 'Manajemen User',
             'children' => [
-                ['name' => 'Daftar User', 'route' => 'users.index'],
-                ['name' => 'Tambah User', 'route' => 'users.create'],
+                ['name' => 'Daftar User', 'route' => 'admin.users.index'],
+                ['name' => 'Tambah User', 'route' => 'admin.users.create'],
+                ['name' => 'Import User', 'route' => 'admin.users.import.form'],
+            ],
+        ],
+        [
+            'name' => 'Master Data',
+            'children' => [
+                ['name' => 'File Management', 'route' => 'files.index'],
+                ['name' => 'School Management', 'route' => 'schools.index'],
+                ['name' => 'Program Category', 'route' => 'program_categories.index'],
+                ['name' => 'Program', 'route' => 'programs.index'],
+                ['name' => 'Semester', 'route' => 'semesters.index'],
+                ['name' => 'Class Group', 'route' => 'class-groups.index'],
             ],
         ],
         [
             'name' => 'Pengaturan',
             'children' => [
-                ['name' => 'Roles', 'route' => 'roles.index'],
-                ['name' => 'Permission', 'route' => 'permissions.index'],
+                
             ],
         ],
     ],
@@ -31,11 +42,27 @@ return [
             'route' => 'dashboard',
         ],
         [
+            'name' => 'Manajemen User',
+            'children' => [
+                ['name' => 'Daftar User', 'route' => 'admin.users.index'],
+                // 'Tambah User' sengaja dihapus
+            ],
+        ],
+        [
+            'name' => 'Master Data',
+            'children' => [
+                ['name' => 'File Management', 'route' => 'files.index'],
+                ['name' => 'School Management', 'route' => 'schools.index'],
+                ['name' => 'Program Category', 'route' => 'program_categories.index'],
+                ['name' => 'Program', 'route' => 'programs.index'],
+                ['name' => 'Semester', 'route' => 'semesters.index'],
+                ['name' => 'Class Group', 'route' => 'class-groups.index'],
+            ],
+        ],
+        [
             'name' => 'Karyawan',
             'children' => [
-                ['name' => 'Daftar Karyawan', 'route' => 'employees.index'],
-                ['name' => 'Absensi', 'route' => 'attendances.index'],
-                ['name' => 'Cuti', 'route' => 'leaves.index'],
+                
             ],
         ],
     ],
@@ -49,8 +76,8 @@ return [
         [
             'name' => 'Kelas Saya',
             'children' => [
-                ['name' => 'Daftar Kelas', 'route' => 'classes.index'],
-                ['name' => 'Jurnal Mengajar', 'route' => 'journals.index'],
+                ['name' => 'Daftar Kelas', 'route' => '#'],
+                ['name' => 'Jurnal Mengajar', 'route' => '#'],
             ],
         ],
     ],
@@ -64,8 +91,8 @@ return [
         [
             'name' => 'KRS & Nilai',
             'children' => [
-                ['name' => 'KRS', 'route' => 'krs.index'],
-                ['name' => 'Nilai', 'route' => 'grades.index'],
+                ['name' => 'KRS', 'route' => '#'],
+                ['name' => 'Nilai', 'route' => '#'],
             ],
         ],
         [
@@ -83,8 +110,8 @@ return [
         [
             'name' => 'Monitoring',
             'children' => [
-                ['name' => 'Report Absensi', 'route' => 'partner.attendance'],
-                ['name' => 'Report Nilai', 'route' => 'partner.grades'],
+                ['name' => 'Report Absensi', 'route' => '#'],
+                ['name' => 'Report Nilai', 'route' => '#'],
             ],
         ],
     ],
@@ -98,8 +125,8 @@ return [
         [
             'name' => 'Data Mahasiswa',
             'children' => [
-                ['name' => 'Daftar Mahasiswa', 'route' => 'students.index'],
-                ['name' => 'Rekap Kehadiran', 'route' => 'pic.attendance'],
+                ['name' => 'Daftar Mahasiswa', 'route' => '#'],
+                ['name' => 'Rekap Kehadiran', 'route' => '#'],
             ],
         ],
     ],
